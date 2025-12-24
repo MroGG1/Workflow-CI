@@ -24,18 +24,8 @@ jobs:
         run: |
           pip install mlflow==2.19.0 scikit-learn pandas
 
-      - name: Check Directory Structure
-        run: |
-          echo "Daftar folder utama:"
-          ls -R
-          
       - name: Run MLflow Project
         run: |
-          # Perintah ini akan mencoba masuk ke folder MLProject jika ada
-          if [ -d "MLProject" ]; then
-            cd MLProject
-            mlflow run . --no-conda
-          else
-            echo "Error: Folder MLProject tidak ditemukan di root!"
-            exit 1
-          fi
+          cd MLProject
+          # Ganti --no-conda dengan --env-manager local
+          mlflow run . --env-manager local
