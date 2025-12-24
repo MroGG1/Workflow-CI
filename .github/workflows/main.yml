@@ -1,34 +1,30 @@
-
 name: Machine Learning CI
 
-# Workflow ini akan berjalan setiap kali Anda melakukan 'push' ke branch main
+# Triggers: Menentukan kapan workflow ini berjalan
 on:
   push:
-    branches: [main]
+    branches: [ "main" ]
   pull_request:
-    branches: [main]
+    branches: [ "main" ]
+  workflow_dispatch: # Tambahan: Memungkinkan Anda menjalankan secara manual
 
 jobs:
   train:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Mengambil kode dari repository GitHub
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Menyiapkan Python versi 3.12.7
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12.7"
+          python-version: '3.12.7'
 
-      # 3. Menginstal library yang dibutuhkan
       - name: Install dependencies
         run: |
           pip install mlflow==2.19.0 scikit-learn pandas
 
-      # 4. Menjalankan MLflow Project
       - name: Run MLflow Project
         run: |
           cd MLProject
