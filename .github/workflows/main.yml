@@ -27,5 +27,4 @@ jobs:
       - name: Run MLflow Project
         run: |
           cd MLProject
-          # Ganti --no-conda dengan --env-manager local
-          mlflow run . --env-manager local
+          mlflow run . --experiment-name Diabetes_Prediction_Basic --env-manager local
