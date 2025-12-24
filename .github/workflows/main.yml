@@ -1,12 +1,11 @@
 name: Machine Learning CI
 
-# Triggers: Menentukan kapan workflow ini berjalan
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch: # Tambahan: Memungkinkan Anda menjalankan secara manual
+  workflow_dispatch:
 
 jobs:
   train:
@@ -25,7 +24,18 @@ jobs:
         run: |
           pip install mlflow==2.19.0 scikit-learn pandas
 
+      - name: Check Directory Structure
+        run: |
+          echo "Daftar folder utama:"
+          ls -R
+          
       - name: Run MLflow Project
         run: |
-          cd MLProject
-          mlflow run . --no-conda
+          # Perintah ini akan mencoba masuk ke folder MLProject jika ada
+          if [ -d "MLProject" ]; then
+            cd MLProject
+            mlflow run . --no-conda
+          else
+            echo "Error: Folder MLProject tidak ditemukan di root!"
+            exit 1
+          fi
