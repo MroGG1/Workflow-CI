@@ -5,8 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-# 1. Atur lokasi penyimpanan MLflow secara lokal
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
 mlflow.set_experiment("Diabetes_Prediction_Basic")
 
 # 2. Aktifkan Autologging (Syarat Level Basic)
@@ -38,4 +36,5 @@ def train_model():
         print(f"Model berhasil dilatih dengan Akurasi: {acc:.4f}")
 
 if __name__ == "__main__":
+
     train_model()
